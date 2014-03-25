@@ -19,7 +19,7 @@ class iodargyrite::aws {
   }
 
   ini_setting { 'autosign':
-    ensure  => present
+    ensure  => present,
     section => 'master',
     setting => 'autosign',
     value   => '/opt/puppet/bin/autosign.rb',
