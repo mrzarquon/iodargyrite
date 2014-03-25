@@ -4,7 +4,7 @@ class iodargyrite::aws {
     ensure  => file,
     owner   => 'pe-puppet',
     group   => 'pe-puppet',
-    mode    => '0600',
+    mode    => '0755',
     replace => false,
     source  => 'puppet:///modules/iodargyrite/autosignfog.yaml',
   }
