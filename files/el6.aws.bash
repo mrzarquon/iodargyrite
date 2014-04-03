@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PE_MASTER='ip-10-245-57-181.us-west-2.compute.internal'
+PE_MASTER='ip-10-98-7-62.ap-southeast-2.compute.internal'
 
 if [ ! -d /etc/yum.repos.d ]; then
   mkdir -p /etc/yum.repos.d
@@ -25,11 +25,11 @@ fi
 
 /opt/puppet/bin/erb > /etc/puppetlabs/puppet/csr_attributes.yaml <<END
 extension_requests:
-  pp_instance_id: <%= %x{/opt/puppet/bin/facter ec2_instance_id} %>
+  pp_instance_id: <%= %x{curl -s http://169.254.169.254/latest/meta-data/instance-id} %>
 END
 
 /opt/puppet/bin/puppet config set server ${PE_MASTER} --section agent
 /opt/puppet/bin/puppet config set environment production --section agent
-/opt/puppet/bin/puppet config set certname $(/opt/puppet/bin/facter ec2_instance_id) --section agent
+/opt/puppet/bin/puppet config set certname $(curl -s http://169.254.169.254/latest/meta-data/instance-id) --section agent
 
 /opt/puppet/bin/puppet resource service pe-puppet ensure=running enable=true
