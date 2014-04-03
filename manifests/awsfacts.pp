@@ -10,6 +10,6 @@ class iodargyrite::awsfacts {
     mode    => '0755',
     owner   => 'pe-puppet',
     group   => 'pe-puppet',
-    content => "puppet:///modules/iodargyrite/ec2_public.sh",
+    source => "puppet:///modules/iodargyrite/ec2_public.sh",
   }
 }
